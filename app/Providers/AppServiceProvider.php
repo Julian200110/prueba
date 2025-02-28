@@ -19,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->app->bind(AuthenticationException::class, function ($exception) {
+            return new JsonResponse(['error' => 'Unauthenticated.'], 401);
+        });
     }
 }
